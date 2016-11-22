@@ -4,19 +4,19 @@ var StringMask = require('string-mask');
 var BrV = require('br-validations');
 var maskFactory = require('mask-factory');
 
-var rgPatterns = [new StringMask('999.999.990-90'), new StringMask('999.999.990-X')];
+var rgPatterns = [new StringMask('#.##0-0',{reverse: true}), new StringMask('#.##0-A', {reverse: true})];
 
 module.exports = maskFactory({
 	clearValue: function(rawValue) {
-		if(/X$/g.test(rawValue))
-			return rawValue.substring(0, rawValue.length-2).replace(/[ˆ\d]/g, '') + "X"; 
+		if(/X$/i.test(rawValue))
+			return rawValue.replace(/[^\dXx]/g, ''); 
 		return rawValue.replace(/[^\d]/g, '');
 	},
 	format: function(cleanValue) {
-		if(/X$/g.test(cleanValue)) {
-			return (rgPatterns[1].apply(cleanValue) || '').substring(0, cleanValue.length-2).trim().replace(/[^0-9]$/, '') + "X";
+		if(/X$/i.test(cleanValue)) {
+			return (rgPatterns[1].apply(cleanValue) || '').trim().toUpperCase();
 		}
-		return (rgPattern[0].apply(cleanValue) || '').trim().replace(/[^0-9]$/, '');
+		return (rgPatterns[0].apply(cleanValue) || '').trim().replace(/[^0-9]$/, '');
 	},
 	validations: {
 		rg: function(value) {
