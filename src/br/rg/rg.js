@@ -9,7 +9,7 @@ var rgPatterns = [new StringMask('#.##9-0',{reverse: true}), new StringMask('#.#
 module.exports = maskFactory({
 	clearValue: function(rawValue) {
 		if(/X$/i.test(rawValue))
-			return rawValue.replace(/[^\dXx]/g, ''); 
+			return rawValue.replace(/[^\dXx]/g, '').toUpperCase(); 
 		return rawValue.replace(/[^\d]/g, '');
 	},
 	format: function(cleanValue) {
