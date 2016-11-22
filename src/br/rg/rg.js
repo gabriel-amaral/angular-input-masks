@@ -4,7 +4,7 @@ var StringMask = require('string-mask');
 var BrV = require('br-validations');
 var maskFactory = require('mask-factory');
 
-var rgPatterns = [new StringMask('#.##0-0',{reverse: true}), new StringMask('#.##0-A', {reverse: true})];
+var rgPatterns = [new StringMask('#.##9-0',{reverse: true}), new StringMask('#.##9-A', {reverse: true})];
 
 module.exports = maskFactory({
 	clearValue: function(rawValue) {
